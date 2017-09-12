@@ -119,7 +119,11 @@ s {
 #code {
     white-space: pre;
 }
-
+#format {
+    position: fixed;
+    right: 1em;
+    bottom: 1em;
+}
 
 
 @media screen and (max-width: 900px) {
