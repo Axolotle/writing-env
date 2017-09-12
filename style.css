@@ -1,0 +1,203 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+html {
+    font-size: 1em;
+    font-family: hack, monospace;
+
+    color: black;
+    background-color: yellow;
+
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+#m {
+    position: absolute;
+    top: 2.5em;
+    right: 2.5em;
+    cursor: pointer;
+    display: none;
+}
+#m p {
+    line-height: 0.5em;
+}
+#m-options {
+    position: absolute;
+    top: 4.5em;
+    right: 2.4em;
+    display: none;
+    background-color: yellow;
+}
+#m-options p a {
+    text-decoration: none;
+}
+
+#center {
+    text-align: center;
+}
+#journal, #text {
+    display: inline-block;
+}
+header, footer {
+    margin: 0 auto;
+}
+.toHide p {
+    display: none;
+}
+
+p {
+    white-space: pre;
+}
+.pad:hover {
+    padding: 0em 10px;
+}
+a {
+    text-decoration: underline;
+}
+a:link, a:visited {
+    color: black;
+}
+a:hover, a:active {
+    cursor: pointer;
+
+}
+#m p::-moz-selection {
+  color: black;
+  background: none;
+}
+#m p::selection {
+  color: black;
+  background: none;
+}
+s {
+    text-decoration: none;
+    background-color: black;
+    color: yellow;
+}
+
+::-moz-selection {
+  color: yellow;
+  background: black;
+}
+::selection {
+  color: yellow;
+  background: black;
+}
+
+
+/* Subtitled episode color code */
+.sub {
+    background-color: black;
+}
+.horschamps {
+    color: yellow;
+}
+.face {
+    color: white
+}
+.bruit {
+    color: red;
+}
+.musique {
+    color: magenta;
+}
+.comm {
+    color: cyan;
+}
+.lang {
+    color: green;
+}
+
+
+
+#code {
+    white-space: pre;
+}
+
+
+
+@media screen and (max-width: 900px) {
+    #journal, #text {
+        display: block;
+    }
+    html {
+        display: block;
+        text-align: center;
+    }
+    header, footer {
+        margin: 0 auto;
+        max-width: 100%;
+    }
+    header {
+        margin-top: 2em;
+    }
+    footer {
+        margin-bottom: 2em;
+    }
+    header p, footer p {
+        white-space: pre-wrap;
+    }
+    footer p:nth-child(2) {
+        white-space: pre;
+        overflow-x: hidden;
+    }
+}
+@media screen and (max-height: 660px) {
+    #center {
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
+    html {
+        display: block;
+    }
+    header {
+        margin-top: 2em;
+    }
+    footer {
+        margin-bottom: 2em;
+    }
+}
+
+
+/* FONTS */
+/*///////*/
+
+/*!
+ *  Hack v2.020 - https://sourcefoundry.org/hack/
+ *  Licenses - Fonts: Hack Open Font License + Bitstream Vera license, CSS: MIT License
+ */
+/* FONT PATHS
+ * -------------------------- */
+@font-face {
+  font-family: 'Hack';
+  src: url('fonts/hack-regular-webfont.woff2?v=2.020') format('woff2'), url('fonts/hack-regular-webfont.woff?v=2.020') format('woff'), url('fonts/hack-regular-webfont.ttf?v=2.020') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Hack';
+  src: url('fonts/hack-bold-webfont.woff2?v=2.020') format('woff2'), url('fonts/hack-bold-webfont.woff?v=2.020') format('woff'), url('fonts/hack-bold-webfont.ttf?v=2.020') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Hack';
+  src: url('fonts/hack-italic-webfont.woff2?v=2.020') format('woff2'), url('fonts/hack-italic-webfont.woff?v=2.020') format('woff'), url('fonts/hack-italic-webfont.ttf?v=2.020') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Hack';
+  src: url('fonts/hack-bolditalic-webfont.woff2?v=2.020') format('woff2'), url('fonts/hack-bolditalic-webfont.woff?v=2.020') format('woff'), url('fonts/hack-bolditalic-webfont.ttf?v=2.020') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}

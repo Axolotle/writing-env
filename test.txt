@@ -1,0 +1,87 @@
+1.2 1 bruit 60/50
+TA
+
+-0.9 0.9 bruit 70/53
+TA
+
+-0.8 0.8 bruit 55/56
+TA
+
+-0.7 0.7 bruit 90/59
+TA
+
+-0.6 0.6 bruit 70/62
+TA
+
+-0.5 0.5 bruit 65/65
+TA
+
+0.245 2.15 horschamps 0/50
+- Eh !
+- Par ici !
+
+2.65 2.15
+Suis-nous.
+
+0.1 2.2 25/50
+Arrêtez... Il va nous ralentir
+
+-0.5 1 horschamps 100/20
+- Les voilà !
+
+-0.8 1 bruit 100/75
+TA
+
+-0.9 0.9 bruit 85/85
+TA
+
+-0.8 0.8 bruit 95/65
+TA
+
+-0.7 0.7 bruit 100/70
+TA
+
+-0.6 0.6 bruit 70/80
+TA
+
+0.35 2.65 horschamps 0/50
+Grouilles-toi !
+Ils sont pas loin
+
+2.044 2.965 face
+Il faut à tout prix se retrancher
+dans le batiment Est.
+
+1 2 lang
+*few years later*
+
+0.1 7 bruit
+*brouhaha incessant*
+
+-6 3 30/60
+Nan, mais franchement, t'y crois à ça ?
+
+-2 3 70/30
+Ça va mais journée de merde en vrai.
+
+-2 3 50/20
+Ouais j'ai vu tout à l'heure,
+trop drôle !
+
+-2 2 bruit 65/85
+*absolument incessant*
+
+-2 3 30/60
+Et là, le type commence à m'insulter
+en anglais
+
+-2 3 70/40
+- Ah ouais ? M'en parles pas...
+Si tu voyais l'ambiance au taff
+
+-2 3 50/20
+- Celle avec le chien là ?
+
+-2 3 comm
+Grosse ambiance ce soir,
+j'sens que je vais pas rester longtemps
