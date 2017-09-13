@@ -1,13 +1,13 @@
-txt = "TEST"
+txt = "Sísifo"
 
 
 font = []
 with open("sisifontFile.txt", "r") as f:
     for i, line in enumerate(f):
-        if i >= 2 and i <= 5:
+        if i >= 1 and i <= 5:
             font.append(line)
 
-output = ["", "", "", ""]
+output = ["", "", "", "", ""]
 for c in txt:
     c = (ord(c)-32)*3
     output_i = 0
