@@ -1,6 +1,22 @@
+var editable = document.getElementById('input');
 
-var button = document.getElementById('gen');
-button.addEventListener("click", generateFont);
+editable.oninput = function() {
+    generateFont();
+};
+editable.onclick = function() {
+    if (editable.innerHTML == "<p>Entrez un texte</p>") {
+        if (document.selection) {
+            var range = document.body.createTextRange();
+            range.moveToElementText(editable.childNodes[0].childNodes[0]);
+            range.select();
+        } else if (window.getSelection) {
+            var range = document.createRange();
+            range.selectNode(editable.childNodes[0].childNodes[0]);
+            window.getSelection().addRange(range);
+        }
+    }
+};
+
 
 function getPureText(nodes) {
     var sentences = [];
@@ -39,6 +55,8 @@ function textToFont(txts) {
     txts.forEach(function(txt) {
         var sentence = ["","","","",""];
 
+        if (txt == "") sentence = [" ", " "];
+
         for (var c = 0; c < txt.length; c++) {
             if (txt.charCodeAt(c) == 10) {
                 continue;
@@ -56,9 +74,25 @@ function textToFont(txts) {
 }
 
 function generateFont() {
-    var input = textToFont(getPureText(document.getElementById('input').children));
+    if (editable.lastChild.nodeName == "BR") {
+        let p = document.createElement("P");
+        p.innerHTML = "";
+        editable.innerHTML = "";
+        editable.appendChild(p);
+
+        var range = document.createRange();
+        var sel = window.getSelection();
+        range.setStart(p, 0);
+        range.collapse(true);
+        sel.removeAllRanges();
+        sel.addRange(range);
+    }
+    var input = textToFont(getPureText(editable.children));
 
     var div = document.getElementById('displayer');
+    while (div.hasChildNodes()) {
+        div.removeChild(div.childNodes[0]);
+    }
 
     input.forEach(function(sentence) {
         sentence.forEach(function(line) {
