@@ -1,4 +1,4 @@
-* {
+html, body {
     margin: 0;
     padding: 0;
 }
@@ -9,4 +9,10 @@ html {
 
 .whitespace p {
     white-space: pre;
+    margin: 0;
+}
+
+#input {
+    min-height: 10em;
+    background-color: yellow;
 }

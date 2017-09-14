@@ -18,29 +18,6 @@ editable.onclick = function() {
 };
 
 
-function getPureText(nodes) {
-    var sentences = [];
-
-    for (var i = 0; i < nodes.length; i++) {
-        let sentence = "";
-
-        for (var child = 0; child < nodes[i].childNodes.length; child++) {
-            if (nodes[i].childNodes[child].nodeName != "#text" ) {
-                sentence += nodes[i].childNodes[child].innerHTML;
-            }
-            else {
-                sentence += nodes[i].childNodes[child].data;
-            }
-        }
-
-        sentence = sentence.replace(/&nbsp;/g, " ").replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/<br>/g, "");
-
-        sentences.push(sentence);
-    }
-
-    return sentences;
-}
-
 function textToFont(txts) {
 
     var font = [
@@ -58,9 +35,6 @@ function textToFont(txts) {
         if (txt == "") sentence = [" ", " "];
 
         for (var c = 0; c < txt.length; c++) {
-            if (txt.charCodeAt(c) == 10) {
-                continue;
-            }
             var pos = (txt.charCodeAt(c)-32)*3;
 
             for (var i = 0; i < font.length; i++) {
@@ -73,21 +47,20 @@ function textToFont(txts) {
     return sentences;
 }
 
-function generateFont() {
-    if (editable.lastChild.nodeName == "BR") {
-        let p = document.createElement("P");
-        p.innerHTML = "";
-        editable.innerHTML = "";
-        editable.appendChild(p);
+function getPureText(nodes) {
+    var re = new RegExp(String.fromCharCode(10).repeat(5),"g");
+    var re2 = new RegExp(String.fromCharCode(10),"g");
 
-        var range = document.createRange();
-        var sel = window.getSelection();
-        range.setStart(p, 0);
-        range.collapse(true);
-        sel.removeAllRanges();
-        sel.addRange(range);
-    }
-    var input = textToFont(getPureText(editable.children));
+    nodes = nodes.replace(re, "\b\b").replace(re2, "\b");
+    sentences = nodes.split("\b");
+
+    return sentences;
+}
+
+function generateFont() {
+
+    var pureText = getPureText(editable.innerText);
+    var input = textToFont(pureText);
 
     var div = document.getElementById('displayer');
     while (div.hasChildNodes()) {
