@@ -1,29 +1,28 @@
 var editable = document.getElementById("input");
 editable.oninput = generateFont;
 editable.onclick = function() {
-    if (editable.innerHTML == "<p>Entrez un texte</p>") {
-        if (document.selection) {
-            var range = document.body.createTextRange();
-            range.moveToElementText(editable.childNodes[0].childNodes[0]);
-            range.select();
-        } else if (window.getSelection) {
-            var range = document.createRange();
-            range.selectNode(editable.childNodes[0].childNodes[0]);
-            window.getSelection().addRange(range);
-        }
+    if (editable.innerHTML == "Entrez un texte") {
+        editable.innerHTML = "";
     }
 };
 
-document.getElementsByClassName("options")[3].onclick = function() {
-    editable.innerHTML = getPureText(editable.innerText).join("<br>");
-}
-document.getElementsByClassName("options")[2].onclick = function() {
-    changeFontSize(document.getElementsByClassName("options")[2].valueAsNumber);
-}
-document.getElementsByClassName("options")[1].oninput = generateFont;
-document.getElementsByClassName("options")[0].onclick = generateFont;
+var opt = document.getElementsByClassName("options");
 
-function textToFont(txts, maxWidth) {
+var timeout, slider = opt[2];
+slider.onmousedown = function() {
+    timeout = setInterval(function() {
+        changeFontSize(slider.valueAsNumber);
+    }, 100);
+}
+document.onmouseup = function() {
+    clearInterval(timeout);
+}
+
+opt[1].oninput = generateFont;
+opt[0].onclick = generateFont;
+opt[3].onclick = generateFont;
+
+function textToFont(txts) {
 
     var font = [
         "                                                                                                                                                                                                                                                                                                                                                                                                                           ╭─╮            ╭─╮╶─╴ ○    ╶╮ ╶╮                 ╮ ╭╮                 \\  /  ^  ~ · · ○        \\  /  ^ · · \\  /  ^ · ·    ~  \\  /  ^  ~ · ·       \\  /  ^ · · /                                                                                                       ",
@@ -40,10 +39,6 @@ function textToFont(txts, maxWidth) {
         if (txt == "") sentence = [" ", " "];
 
         for (var c = 0; c < txt.length; c++) {
-            if (maxWidth != NaN && c!=0 && c % maxWidth == 0) {
-                sentences.push(sentence);
-                sentence = ["","","","",""];
-            }
             var pos = (txt.charCodeAt(c)-32)*3;
 
             for (var i = 0; i < font.length; i++) {
@@ -57,12 +52,8 @@ function textToFont(txts, maxWidth) {
 }
 
 function getPureText(nodes) {
-    var re = new RegExp(String.fromCharCode(10).repeat(5),"g");
-    var re2 = new RegExp(String.fromCharCode(10).repeat(2),"g");
-    var re3 = new RegExp(String.fromCharCode(10),"g");
-
-    nodes = nodes.replace(re, "\b\b").replace(re2, "\b").replace(re3, "\b");
-    sentences = nodes.split("\b");
+    nodes = nodes.replace(/’/g, "'").replace(/Œ/g, "OE").replace(/œ/g, "oe");
+    sentences = nodes.split(String.fromCharCode(10));
 
     return sentences;
 }
@@ -103,15 +94,38 @@ function overlap(txts) {
 function generateFont() {
 
     var pureText = getPureText(editable.innerText);
-    var optObj = document.getElementsByClassName("options");
+
+    if (editable.hasChildNodes()) {
+        let clean = false;
+        for (var i = 0; i < editable.children.length; i++) {
+            if (editable.children[i].nodeName != "BR") {
+                clean = true;
+                break;
+            }
+        }
+        if (clean) {
+            editable.innerHTML = pureText.join("<br>");
+        }
+    }
+
     var options = {
-        "overlap" : optObj[0].checked,
-        "maxWidth": parseInt(optObj[1].value),
-        "fontSize": optObj[2].valueAsNumber
+        "overlap" : opt[0].checked,
+        "maxWidth": parseInt(opt[1].value),
+        "fontSize": opt[2].valueAsNumber,
+        "upperCase" : opt[3].checked
     };
 
-    var input = textToFont(pureText, options.maxWidth);
+
+    if (options.maxWidth != NaN) {
+        pureText = reduceText(pureText, options.maxWidth);
+    }
+    if (options.upperCase) {
+        pureText = pureText.map(function(x) { return x.toUpperCase(); });
+    }
     changeFontSize(options.fontSize);
+
+    var input = textToFont(pureText);
+
     if (options.overlap) {
         input = overlap(input);
     }
@@ -129,6 +143,50 @@ function generateFont() {
         });
     });
 
+}
+
+function reduceText(txts, size) {
+    var max = Math.floor(size/3);
+
+    var newTxts = [];
+
+    txts.forEach(function(line) {
+        if (line.length > max) {
+            var newLine = [];
+            var length = 0;
+            var splittedLine = line.split(" ");
+
+            var dontEscape = ["?", "!", ":", ";"];
+
+            splittedLine.forEach(function(word) {
+                var width = length == 0 ? length + word.length : length + 1 + word.length;
+
+                if (width <= max) {
+                    newLine.push(word);
+                    length += length == 0 ? word.length : 1 + word.length;
+                }
+                else if (dontEscape.indexOf(word) > -1) {
+                    var lastword = sentence.pop();
+                    newTxts.push(newLine.join(" "));
+
+                    newLine = [lastword, word];
+                    length = lastword.length + 1 + word.length;
+                }
+                else {
+                    newTxts.push(newLine.join(" "));
+                    newLine = [word];
+                    length = word.length;
+                }
+
+            });
+            newTxts.push(newLine.join(" "))
+        }
+        else {
+            newTxts.push(line);
+        }
+    });
+
+    return newTxts;
 }
 
 function changeFontSize(size) {
