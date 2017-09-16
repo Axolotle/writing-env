@@ -18,13 +18,26 @@
     </header>
     <div id="main">
 
-        <div id="input" contenteditable="true">Entrez un texte</div>
-        <div id="options">
-            <p>line-heigth -1 <input class="options" type="checkbox"></p>
-            <p>max-width<input class="options" type="text" value="50"></p>
-            <p>font-size <input class="options" type="range" value="12" min="8" max="40"></p>
-            <p>uppercase <input class="options" type="checkbox"></p>
-        </div>
+        <div id="input" contenteditable="true">Write something here</div>
+        <form id="options">
+
+            <p>
+                <span>max-width :</span>
+                <input class="options" id="maxWidth" type="text" value="35">
+            </p>
+            <p>
+                <span>font-size :</span>
+                <input class="options" id="fontSize" type="range" value="12" min="8" max="40">
+            </p>
+            <p id="spaced">
+                <input class="options" id="checkbox-1" type="checkbox">
+                <label for="checkbox-1">line-heigth -1</label>
+            </p>
+            <p>
+                <input class="options" id="checkbox-2" type="checkbox">
+                <label for="checkbox-2">uppercase</label>
+            </p>
+        </form>
     </div>
     <div id="displayer" class="whitespace"></div>
 

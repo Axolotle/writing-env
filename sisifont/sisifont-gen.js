@@ -1,14 +1,14 @@
 var editable = document.getElementById("input");
 editable.oninput = generateFont;
 editable.onclick = function() {
-    if (editable.innerHTML == "Entrez un texte") {
+    if (editable.innerHTML == "Write something here") {
         editable.innerHTML = "";
     }
 };
 
 var opt = document.getElementsByClassName("options");
 
-var timeout, slider = opt[2];
+var timeout, slider = opt[1];
 slider.onmousedown = function() {
     timeout = setInterval(function() {
         changeFontSize(slider.valueAsNumber);
@@ -18,9 +18,7 @@ document.onmouseup = function() {
     clearInterval(timeout);
 }
 
-opt[1].oninput = generateFont;
-opt[0].onclick = generateFont;
-opt[3].onclick = generateFont;
+opt[0].oninput = opt[2].onclick = opt[3].onclick = generateFont;
 
 function textToFont(txts) {
 
@@ -109,9 +107,9 @@ function generateFont() {
     }
 
     var options = {
-        "overlap" : opt[0].checked,
-        "maxWidth": parseInt(opt[1].value),
-        "fontSize": opt[2].valueAsNumber,
+        "overlap" : opt[2].checked,
+        "maxWidth": parseInt(opt[0].value),
+        "fontSize": opt[1].valueAsNumber,
         "upperCase" : opt[3].checked
     };
 
@@ -135,23 +133,26 @@ function generateFont() {
         div.removeChild(div.childNodes[0]);
     }
 
+    var t = "";
+    let p = document.createElement("p");
     input.forEach(function(sentence) {
-        sentence.forEach(function(line) {
-            let p = document.createElement("P");
-            p.innerHTML = line;
-            div.appendChild(p);
-        });
+        // sentence.forEach(function(line) {
+        //     let p = document.createElement("p");
+        //     p.innerHTML = line;
+        //     div.appendChild(p);
+        // });
+        t += sentence.join("<br>");
     });
+    p.innerHTML = t;
+    div.appendChild(p);
 
 }
 
 function reduceText(txts, size) {
-    var max = Math.floor(size/3);
-
     var newTxts = [];
 
     txts.forEach(function(line) {
-        if (line.length > max) {
+        if (line.length > size) {
             var newLine = [];
             var length = 0;
             var splittedLine = line.split(" ");
@@ -161,7 +162,7 @@ function reduceText(txts, size) {
             splittedLine.forEach(function(word) {
                 var width = length == 0 ? length + word.length : length + 1 + word.length;
 
-                if (width <= max) {
+                if (width <= size) {
                     newLine.push(word);
                     length += length == 0 ? word.length : 1 + word.length;
                 }
