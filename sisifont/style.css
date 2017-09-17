@@ -1,42 +1,52 @@
 html {
     margin: 0;
     padding: 0;
-}
-
-html {
     font-family: monospace;
     font-size: 1em;
 }
+
 body {
     margin: auto;
     max-width: 80%;
 }
-.whitespace p {
-    white-space: pre;
-    margin: 0;
-}
+
 
 header {
     margin: 3em 0 2em 0;
 }
+header p {
+    white-space: pre;
+    margin: 0;
+}
 #main {
     display: flex;
+    width: 100%;
+    margin-bottom: 1em;
 }
+code {
+    margin: 0;
+    white-space: pre;
+}
+
+
 #input {
     height: 15em;
     background-color: yellow;
-    width: 60%;
+    width: 65%;
     overflow-x: auto;
     padding: 1em;
     outline: none;
 }
 #options {
-    width: 40%;
+    width: 35%;
+    min-width: 10em;
     padding-left: 1.5em;
 }
 
 #displayer {
     margin-top: 1em;
+    display: block;
+    margin-bottom: 5em;
 }
 
 #spaced {
@@ -61,6 +71,19 @@ header {
 #maxWidth:focus {
     outline: none;
 }
+#selection {
+    position: fixed;
+    left: 10%;
+    bottom: 3em;
+    background-color: black;
+    color: white;
+    padding: 1em;
+    cursor: pointer;
+}
+#selection:hover {
+    text-decoration: underline;
+}
+
 
 /* range css */
 input[type=range]::-moz-focus-outer {
@@ -193,4 +216,31 @@ input[type=range]:focus::-ms-fill-upper {
 /* hover style just for information */
 label:hover:before {
     border-color: yellow !important;
+}
+
+
+
+
+::-moz-selection {
+    background-color: rgba(0, 0, 0, 0);
+}
+::selection {
+    background-color: rgba(0, 0, 0, 0);
+}
+#input::-moz-selection {
+    color: yellow;
+    background-color: black;
+}
+
+#input::selection {
+    color: yellow;
+    background-color: black;
+}
+#displayer::-moz-selection {
+    color: black;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+#displayer::selection {
+    color: black;
+    background-color: rgba(0, 0, 0, 0.5);
 }

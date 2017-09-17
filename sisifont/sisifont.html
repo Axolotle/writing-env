@@ -11,7 +11,7 @@
     <link type="image/png" rel="icon" href="" />
 </head>
 <body>
-    <header class="whitespace">
+    <header>
         <p>╭─╴╶┬╴╭─╴╶┬╴┌─╴╭─╮╭╮╷╶┬╴   ╭─╮┌─╴╭╮╷</p>
         <p>╰─╮ │ ╰─╮ │ ├─╴│ ││││ │ ╶─╴│╶╮├─╴│││</p>
         <p>╶─╯╶┴╴╶─╯╶┴╴╵  ╰─╯╵╰╯ ╵    ╰─╯╰─╴╵╰╯</p>
@@ -20,7 +20,6 @@
 
         <div id="input" contenteditable="true">Write something here</div>
         <form id="options">
-
             <p>
                 <span>max-width :</span>
                 <input class="options" id="maxWidth" type="text" value="35">
@@ -39,7 +38,8 @@
             </p>
         </form>
     </div>
-    <div id="displayer" class="whitespace"></div>
+    <a id="selection">Select rendered text</a>
+    <code id="displayer"></code>
 
     <script type="text/javascript" src="sisifont-gen.js"></script>
 </body>

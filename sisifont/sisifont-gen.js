@@ -20,6 +20,21 @@ document.onmouseup = function() {
 
 opt[0].oninput = opt[2].onclick = opt[3].onclick = generateFont;
 
+var selector = document.getElementById("selection");
+selector.onclick = function() {
+    if (document.selection) {
+        var range = document.body.createTextRange();
+        range.moveToElementText(document.getElementById("displayer"));
+        range.select();
+    } else if (window.getSelection) {
+        var range = document.createRange();
+        range.selectNode(document.getElementById("displayer"));
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+    }
+
+}
+
 function textToFont(txts) {
 
     var font = [
@@ -133,18 +148,11 @@ function generateFont() {
         div.removeChild(div.childNodes[0]);
     }
 
-    var t = "";
-    let p = document.createElement("p");
+    var output = "";
     input.forEach(function(sentence) {
-        // sentence.forEach(function(line) {
-        //     let p = document.createElement("p");
-        //     p.innerHTML = line;
-        //     div.appendChild(p);
-        // });
-        t += sentence.join("<br>");
+        output += sentence.join("<br>") + "<br>";
     });
-    p.innerHTML = t;
-    div.appendChild(p);
+    div.innerHTML = output;
 
 }
 
