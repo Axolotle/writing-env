@@ -1,7 +1,9 @@
+window.onload = generateFontSpecimen;
+
 var editable = document.getElementById("input");
 editable.oninput = generateFont;
 editable.onclick = function() {
-    if (editable.innerHTML == "Write something here") {
+    if (editable.innerHTML == "Write something here.") {
         editable.innerHTML = "";
     }
 };
@@ -19,6 +21,7 @@ document.onmouseup = function() {
 }
 
 opt[0].oninput = opt[2].onclick = opt[3].onclick = generateFont;
+document.getElementById("specimen").onclick = generateFontSpecimen;
 
 var selector = document.getElementById("selection");
 selector.onclick = function() {
@@ -32,7 +35,6 @@ selector.onclick = function() {
         window.getSelection().removeAllRanges();
         window.getSelection().addRange(range);
     }
-
 }
 
 function textToFont(txts) {
@@ -152,6 +154,35 @@ function generateFont() {
     input.forEach(function(sentence) {
         output += sentence.join("<br>") + "<br>";
     });
+    div.innerHTML = output;
+
+}
+
+function generateFontSpecimen() {
+    var input = [
+        "Ô mage aztèque, l'écuyer vêtu d'un kit hawaïen et de bijoux reçut au coeur l'âcre piqûre, de l'île où arrive son frêle canoë.",
+        "",
+        "Ô MAGE AZTÈQUE, L'ÉCUYER VÊTU D'UN KIT HAWAÏEN ET DE BIJOUX REÇUT AU COEUR L'ÂCRE PIQÛRE, DE L'ÎLE OÙ ARRIVE SON FRÊLE CANOË.",
+        "",
+        "",
+        "! \" # $ % & ' ( ) * + , - . / 0 1 2 3 4 5 6 7 8 9 : ; < = > ? @ A B C D E F G H I J K L M N O P Q R S T U V W X Y Z [ \\ ] ^ _ ` a b c d e f g h i j k l m n o p q r s t u v w x y z { | } ~",
+        "",
+        "",
+        "¡ ¢ £ ¤ ¥ ¦ § ¨ © ª « ¬   ® ¯ ° ± ² ³ ´ µ ¶ · ¸ ¹ º » ¼ ½ ¾ ¿ À Á Â Ã Ä Å Æ Ç È É Ê Ë Ì Í Î Ï Ð Ñ Ò Ó Ô Õ Ö × Ø Ù Ú Û Ü Ý Þ ß à á â ã ä å æ ç è é ê ë ì í î ï ð ñ ò ó ô õ ö ÷ ø ù ú û ü ý þ ÿ"
+    ];
+
+    input = textToFont(reduceText(input, 40));
+
+    var div = document.getElementById('displayer');
+    while (div.hasChildNodes()) {
+        div.removeChild(div.childNodes[0]);
+    }
+
+    var output = "";
+    input.forEach(function(sentence) {
+        output += sentence.join("<br>") + "<br>";
+    });
+    output += "<br><br><br>characters used :<br><br>─ │ ┌ ┐ └ ┘ ├ ┤ ┬ ┴ ┼ ╭ ╮ ╯ ╰ ╴ ╵ ╶ ╷ ~ ^ ○ · / \\<br><br><br><br><br>Sísifont is a box-drawing characters font originally created for <a href='https://sisifo.site/' target='_blanck'>Sísifo</a>.<br><br>Feel free to use it.<br>Nicolas Chesnais - <a href='https://autre.space/' target='_blanck'>autre.space</a>";
     div.innerHTML = output;
 
 }
