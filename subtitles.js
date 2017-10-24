@@ -6,16 +6,19 @@ document.getElementById("format").addEventListener("click", function() {
     readTxtFile("test.txt", parseSubtitles, displayJSON);
 });
 
-function readTxtFile(file, callbackParser, callback) {
-    var rawFile = new XMLHttpRequest();
-    rawFile.open("GET", file, true);
-    rawFile.overrideMimeType("text/plain");
-    rawFile.onreadystatechange = function() {
-        if (rawFile.readyState === 4 && rawFile.status == "200") {
-            callbackParser(rawFile.responseText, callback);
+function readTxtFile(file) {
+    return new Promise((resolve, reject) => {
+        var rawFile = new XMLHttpRequest();
+        rawFile.open("GET", file);
+        rawFile.overrideMimeType("text/plain");
+        rawFile.onload = () => {
+            if (rawFile.readyState === 4 && rawFile.status == "200") {
+                resolve(rawFile.responseText);
+            }
         }
-    }
-    rawFile.send(null);
+        rawFile.onerror = () => reject("Couldn't find '" + url +"'");
+        rawFile.send(null);
+    });
 }
 
 function parseSubtitles(data, callback) {
@@ -47,7 +50,9 @@ function parseSubtitles(data, callback) {
         timer.push(sumTimer);
 
         var color, pos;
-        if (opt.length == 4) {
+
+        // FIXME 5 a la place de 4
+        if (opt.length == 5 || opt.length == 4) {
             color = opt[2];
             pos = opt[3].split("/").map(function(n) {return parseInt(n)});
         }
@@ -65,11 +70,15 @@ function parseSubtitles(data, callback) {
             color = "face";
             pos = [50,100];
         }
-
-        txt.push([timer, sub, color, pos]);
+        //FIXME /!\ opt[4] a l'arrache
+        lol = [timer, sub, color, pos];
+        if (opt[4] != undefined) lol.push(opt[4])
+        txt.push(lol);
     });
 
-    callback(txt);
+    //callback(txt);
+    // FIXME
+    displayJSON(txt);
 }
 
 function runSubtitles(txt) {
@@ -107,26 +116,16 @@ function runSubtitles(txt) {
 
     txts[1].txt = txt
 
-    box.init(opt);
-    var infoEp = new ModifyJSON(txts.shift(), txts, box);
-    infoEp = new Animation(infoEp, box);
+    box.init(boxOptions);
+    const formatter = new FormatJSON(box.x, box.y, box.marginX, box.marginY);
+    const infos = new Animation(formatter.getNewJSON(txts.shift()));
+    const sub = new Animation(formatter.getNewJSON(txts));
 
-    txts[0] = new ModifyJSON(txts[0], txts, box);
-    var txtAnim = [new Animation(txts[0], box)]
+    box.display(box);
+    infos.appendText(box);
 
-    Step(
-        function init() {
-            box.displayBox(this);
-            //box.reDraw(this);
-        },
-        function menu() {
-            infoEp.appendText();
-            startEp(this);
-        },
-        function flow0() {
-            txtAnim[0].startSubtitles(this);
-        }
-    );
+    await startListener();
+    await sub[0].startSubtitles(box);
 }
 
 function displayJSON(txt) {
@@ -150,7 +149,12 @@ function displayJSON(txt) {
             str += '"], ';
         }
         str += '"'+t[2]+'", ';
-        str += '['+t[3][0]+','+t[3][1]+']]'
+        str += '['+t[3][0]+','+t[3][1]+']'
+        // FIXME ajouté à l'arrache
+        if (t[4] != undefined) {
+            str += ', '+ t[4];
+        }
+        str += ']';
 
         if (index < array.length-1) {
             str += ',';
