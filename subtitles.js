@@ -1,5 +1,5 @@
 var box = new Box();
-var file = "luvan";
+var file = "leo";
 
 readTxtFile(file)
 .then(txtFile => parseSubtitles(txtFile))

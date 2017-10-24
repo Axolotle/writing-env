@@ -1,0 +1,156 @@
+2 3 bruit 50/50
+*détonations lointaines*
+
+1 4 lang 0/100
+[anglais] — On y voit rien
+dans leur foutu gourbi !
+
+1.5 3 bruit 50/100 -2
+*crépitement de tabac qu'on allume*
+
+0.5 3
+— Ce sont nos alliés objectifs.
+
+0.3 3
+Ils sont là pour nous aider.
+
+1 2
+Tu dis rien ?
+
+1.5 3
+— Tu sais déjà ce que j'en pense.
+
+1 6 bruit 50/100 -2
+*casseroles qu'on déplace*
+
+-3 4 lang 0/100
+[anglais] — Qu'est-ce qu'ils racontent encore ?
+
+1 5 lang 0/100
+[anglais] — Comme toujours. Ils débattent
+de qui fera la vaisselle…
+
+0.3 3 lang 0/100
+[anglais] … De qui dormira en-dessous cette nuit.
+
+1 3 lang 0/100
+[anglais] — Ils vont peut-être voter à main levée ?
+
+-0.3 6 bruit 0/100 -2
+*rires*
+
+-3 6
+— À force de tenir des piquets de grève et de casser du flic,
+ils sont tombés amoureux de leur engagement
+
+0.3 3
+De la tension, de la peur…
+
+0.3 3
+… amoureux de la violence.
+
+1 6 bruit 0/100 -2
+*rires*
+
+-2 6
+— On commence par faire la guerre par nécessité,
+on continue par habitude et par plaisir.
+
+1.5 2
+— Tu es injuste.
+
+0.5 5
+Ils ont fait des milliers de kilomètres.
+Pour nous. Pour notre lutte.
+
+0.3 3
+— Et c'est quoi notre lutte ?
+
+1 4 bruit 50/50
+*détonations plus proches*
+
+2 3 lang 0/100
+[anglais] — Putain de moulins à parole.
+
+2 5.5
+— Il n'y a que pour la révolution sociale
+que je peux accepter de me battre.
+
+0.5 5.5
+Si la révolution devient seconde,
+alors la guerre n'a plus lieu d'être.
+
+0.3 4
+Tuer des gens, Franco aussi sait le faire.
+
+0.3 4
+— Tu mélanges tout.
+Ça n'a rien à voir.
+
+0.75 3 lang 0/100
+[anglais] — Tiens, j'en ai une bonne…
+
+1 3 lang 0/100
+[anglais] — Qu'est-ce qui est plus bavard qu'un anarchiste ?
+
+1 2 lang 0/100
+[anglais] — Deux anarchistes ?
+
+0.5 2 lang 0/100
+[anglais] — Un anarchiste espagnol !
+
+0.2 5 bruit 0/100 -2
+*rires*
+
+-1 4 bruit 50/0
+*explosion*
+
+-2 4 bruit 50/0 3
+*crépitement de plâtre*
+
+0 4 horschamps 0/0 2
+— Les Maures !
+
+-1 5 horschamps 100/25
+— Ça bouge au sud.
+Ils montent par del Amo.
+
+0.5 3 horschamps 100/25
+— Ils ont des chars.
+
+0.45 3 lang 0/100 -2
+[anglais] — On y va les gars !
+
+0 3 lang 35/100 -2
+[anglais] — Allez !
+
+-1 3
+— Marcelo,
+ton fusil !
+
+-1 3 bruit 50/100 -2
+*vaisselle renversée*
+
+-1 2
+— Merde.
+
+1 3
+J'y vois rien.
+
+2 4 bruit 50/50
+*détonations*
+
+2 3 face 100/100
+— Ici.
+
+-1 6 bruit 50/50
+*explosions*
+
+1 3 face 100/100
+— Mon Dieu…
+
+-0.3 12 musique 50/50
+Beethoven – Opus 111, Arrietta
+
+-8 4 face 100/100
+… que c'est beau.

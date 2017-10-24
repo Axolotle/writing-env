@@ -99,10 +99,10 @@ s {
     color: yellow;
 }
 .face {
-    color: white
+    color: white;
 }
 .bruit {
-    color: red;
+    color: orangeRed;
 }
 .musique {
     color: magenta;
@@ -111,7 +111,7 @@ s {
     color: cyan;
 }
 .lang {
-    color: green;
+    color: Chartreuse;
 }
 
 
